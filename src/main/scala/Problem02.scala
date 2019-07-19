@@ -17,7 +17,9 @@ object Problem02 {
     println(result)
   }
 
-  def fibonacci: Seq[Int] = {
+  def fibonacci = fibonacci3()
+
+  def fibonacci1: Seq[Int] = {
     def next(state: (Int, Int)) = {
       Some(state._1 + state._2, (state._2, state._1 + state._2))
     }
@@ -29,4 +31,8 @@ object Problem02 {
 
 //  def fibonacci2 : LazyList[Int] = 0 #:: 1 #:: fibonacci2.zip(fibonacci2.tail).map { n => n._1 + n._2 }
 //  def fibonacci2 : Stream[Int] = fibonacci2.zip§§(fibonacci2.tail).map{case(a,b) => a+b}
+
+
+  def fibonacci3(a: Int = 0, b: Int = 1): LazyList[Int] = LazyList.cons(a, fibonacci3(b, a+b))
+
 }
