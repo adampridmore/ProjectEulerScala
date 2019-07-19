@@ -7,6 +7,7 @@
 // million, find the sum of the even-valued terms.
 
 object Problem02 {
+
   def main(args: Array[String]) {
     val nextFib = (a: Int, b: Int) => (b, a + b)
 
@@ -15,57 +16,21 @@ object Problem02 {
       else xs.head + sum3(xs.tail)
     }
 
-//    def unfold[A, S](z: S)(f: S => Option[(A, S)]): Stream[A] = {
-//      f(z) match {
-//        case Some((h, s)) => Stream.cons(h, unfold(s)(f))
-//        case _ => Stream.empty
-//      }
-//    }
-//    val fibonacci = unfold((0L, 1L))(x => Some(x._1, (x._2, x._1 + x._2)))
+    val result = fibseq
+      .takeWhile(x => x < 4000000)
+      .filter(x => x % 2 == 0)
+      .sum
 
-//    def next(state: Int): Option[(String, Int)] = {
-//      Some(s"A${(state + 1)}", (state + 1))
-//    }
-//
-//    println(LazyList
-//      .unfold(0)(next)
-//      //.drop()
-//      .take(100)
-//      .mkString(","))
+    println(result)
+  }
 
-
-    def fibseq: Seq[Int] = {
-      def next(state: (Int, Int)) = {
-        Some(state._1 + state._2, (state._2, state._1 + state._2) )
-      }
-
-      val init = (0,1)
-
-      init._1 #:: LazyList.unfold(init)(next)
+  def fibseq: Seq[Int] = {
+    def next(state: (Int, Int)) = {
+      Some(state._1 + state._2, (state._2, state._1 + state._2))
     }
 
-    println(fibseq
-      .take(100)
-      .mkString(","))
+    val init = (0, 1)
 
-    //    def fib(index :Int):Int = {
-    //      index match {
-    //        case 0 => 1
-    //        case 1 => 2
-    //        case x => fib(x - 1) + fib(x - 2)
-    //      }
-    //    }
-    //
-    //    println(nextFib(0,1))
-    //
-    //    println(fib(0))
-    //    println(fib(1))
-    //    println(fib(2))
-    //    println(fib(3))
-    //    println(fib(4))
-    //    println(fib(5))
-    //    println(fib(6))
-    //    println(fib(7))
-    //    //List.fill(0,10)
+    init._1 #:: LazyList.unfold(init)(next)
   }
 }
