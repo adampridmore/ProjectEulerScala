@@ -9,14 +9,7 @@
 object Problem02 {
 
   def main(args: Array[String]) {
-    val nextFib = (a: Int, b: Int) => (b, a + b)
-
-    def sum3(xs: List[Int]): Int = {
-      if (xs.isEmpty) 0
-      else xs.head + sum3(xs.tail)
-    }
-
-    val result = fibseq
+    val result = fibonacci
       .takeWhile(x => x < 4000000)
       .filter(x => x % 2 == 0)
       .sum
@@ -24,7 +17,7 @@ object Problem02 {
     println(result)
   }
 
-  def fibseq: Seq[Int] = {
+  def fibonacci: Seq[Int] = {
     def next(state: (Int, Int)) = {
       Some(state._1 + state._2, (state._2, state._1 + state._2))
     }
@@ -33,4 +26,7 @@ object Problem02 {
 
     init._1 #:: LazyList.unfold(init)(next)
   }
+
+//  def fibonacci2 : LazyList[Int] = 0 #:: 1 #:: fibonacci2.zip(fibonacci2.tail).map { n => n._1 + n._2 }
+//  def fibonacci2 : Stream[Int] = fibonacci2.zip§§(fibonacci2.tail).map{case(a,b) => a+b}
 }
