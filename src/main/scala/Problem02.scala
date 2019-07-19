@@ -33,6 +33,6 @@ object Problem02 {
 //  def fibonacci2 : Stream[Int] = fibonacci2.zip§§(fibonacci2.tail).map{case(a,b) => a+b}
 
 
-  def fibonacci3(a: Int = 0, b: Int = 1): LazyList[Int] = LazyList.cons(a, fibonacci3(b, a+b))
+  def fibonacci3(a: BigInt = 0, b: BigInt = 1): LazyList[BigInt] = LazyList.cons(a, fibonacci3(b, a+b))
 
 }
